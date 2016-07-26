@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
+ * Copyright (C) 2016 The MoKee Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.cyanogenmod.cmaudio.service;
+package org.mokee.mkaudio.service;
 
 
 import android.app.Service;
@@ -28,18 +29,18 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import cyanogenmod.media.AudioSessionInfo;
-import cyanogenmod.media.CMAudioManager;
-import cyanogenmod.media.ICMAudioService;
-import cyanogenmod.platform.Manifest;
+import mokee.media.AudioSessionInfo;
+import mokee.media.MKAudioManager;
+import mokee.media.IMKAudioService;
+import mokee.platform.Manifest;
 
-public class CMAudioService extends Service {
+public class MKAudioService extends Service {
 
-    private static final String TAG = "CMAudioService";
+    private static final String TAG = "MKAudioService";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     static {
-        System.loadLibrary("cmaudio_jni");
+        System.loadLibrary("mkaudio_jni");
         if (DEBUG) Log.d(TAG, "loaded jni lib");
     }
 
@@ -75,7 +76,7 @@ public class CMAudioService extends Service {
         super.onDestroy();
     }
 
-    private final IBinder mBinder = new ICMAudioService.Stub() {
+    private final IBinder mBinder = new IMKAudioService.Stub() {
 
         @Override
         public List<AudioSessionInfo> listAudioSessions(int streamType) throws RemoteException {
@@ -92,9 +93,9 @@ public class CMAudioService extends Service {
     };
 
     private void broadcastSessionChanged(boolean added, AudioSessionInfo sessionInfo) {
-        Intent i = new Intent(CMAudioManager.ACTION_AUDIO_SESSIONS_CHANGED);
-        i.putExtra(CMAudioManager.EXTRA_SESSION_INFO, sessionInfo);
-        i.putExtra(CMAudioManager.EXTRA_SESSION_ADDED, added);
+        Intent i = new Intent(MKAudioManager.ACTION_AUDIO_SESSIONS_CHANGED);
+        i.putExtra(MKAudioManager.EXTRA_SESSION_INFO, sessionInfo);
+        i.putExtra(MKAudioManager.EXTRA_SESSION_ADDED, added);
 
         sendBroadcastToAll(i, Manifest.permission.OBSERVE_AUDIO_SESSIONS);
     }

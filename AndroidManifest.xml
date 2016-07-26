@@ -18,21 +18,21 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionCode="1"
-          package="org.cyanogenmod.cmaudio.service">
+          package="org.mokee.mkaudio.service">
 
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
 
-    <uses-permission android:name="cyanogenmod.permission.BIND_CORE_SERVICE" />
-    <uses-permission android:name="cyanogenmod.permission.MANAGE_AUDIO_SESSIONS" />
+    <uses-permission android:name="mokee.permission.BIND_CORE_SERVICE" />
+    <uses-permission android:name="mokee.permission.MANAGE_AUDIO_SESSIONS" />
 
     <application android:label="@string/app_name">
 
-        <service android:name="org.cyanogenmod.cmaudio.service.CMAudioService"
-                 android:permission="cyanogenmod.permission.BIND_CORE_SERVICE"
+        <service android:name="org.mokee.mkaudio.service.MKAudioService"
+                 android:permission="mokee.permission.BIND_CORE_SERVICE"
                  android:enabled="true"
                  android:exported="true">
             <intent-filter>
-                <action android:name="cyanogenmod.app.AudioManagerService"/>
+                <action android:name="mokee.app.AudioManagerService"/>
             </intent-filter>
         </service>
 
