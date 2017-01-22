@@ -34,11 +34,6 @@ LOCAL_JNI_SHARED_LIBRARIES := libmkaudio_jni
 
 LOCAL_PRIVILEGED_MODULE := true
 
-# Sign the package when not using test-keys
-ifneq ($(DEFAULT_SYSTEM_DEV_CERTIFICATE),build/target/product/security/testkey)
-LOCAL_CERTIFICATE := cyngn-priv-app
-endif
-
 include $(BUILD_PACKAGE)
 
 ifeq ($(strip $(LOCAL_PACKAGE_OVERRIDES)),)
